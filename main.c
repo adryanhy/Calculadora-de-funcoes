@@ -29,6 +29,8 @@ float tangente(float x){
 
 
 int main() {
+    float a, b, c, x, result_quadratic;
+
     int selectMenu;
     printf("\tMENU\n");
     printf("Selecione uma das opcoes abaixo: \n");
@@ -43,6 +45,21 @@ int main() {
     printf("0. SAIR\n");
     scanf("%d", &selectMenu);
 
+    switch (selectMenu) {
+        case 3:
+            printf("Digite o valor de a: \n");
+            scanf("%f", &a);
+            printf("Digite o valor de b: \n");
+            scanf("%f", &b);
+            printf("Digite o valor de c: \n");
+            scanf("%f", &c);
+            printf("Digite o valor de x: \n");
+            scanf("%f", &x);
+
+            result_quadratic = quadratic(a,b,c,x);
+
+            printf("Resultado: %.4f ", result_quadratic);
+    }
 
 
     return 0;
