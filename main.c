@@ -4,9 +4,10 @@
 #include <string.h>
 
 /*--------------Adryan Andre------------------*/
+/*--------------Lais Teixeira------------------*/
 
 void header(){
-    printf("------------CALCULADORA DE CONVERSAO--------------\n");
+    printf("------------CALCULADORA DE FUNCAO--------------\n");
 }
 
 float radianos_graus(float radianos)
@@ -21,10 +22,22 @@ float graus_radianos(float graus)
     return graus * (PI / 180.0);
 }
 
+
+//f(x) = k
+float constante(float k) {
+    return k;
+}
+
+
 //f(x) = a.x^2+b.x+c
 float quadratic(float a, float b, float c, float x){
     float result = (a * x * x) + (b * x) + c;
     return result;
+}
+
+//f(x)= log_k(x)
+float logaritmo(float k, float x) {
+    return log(x) / log(k);
 }
 
 //f(x) = sin(x), f(x) = cos(x) e f(x) = tan(x)
@@ -47,14 +60,51 @@ float funcaoLinear(float a, float b, float x) {
     return a*x + b;
 }
 
+float grausParaRadianos(float graus) {
+    return graus * M_PI / 180;
+}
+
+void calcularSeno(float x, char unidade) {
+    float resultado;
+    if (unidade == 'r') {
+        resultado = sin(x);
+    } else {
+        resultado = sin(grausParaRadianos(x));
+    }
+    printf("f(x) = %.4f\n", resultado);
+}
+
+void calcularCosseno(float x, char unidade) {
+    float resultado;
+    if (unidade == 'r') {
+        resultado = cos(x);
+    } else {
+        resultado = cos(grausParaRadianos(x));
+    }
+    printf("f(x) = %.4f\n", resultado);
+}
+
+void calcularTangente(float x, char unidade) {
+    float resultado;
+    if (unidade == 'r') {
+        resultado = tan(x);
+    } else {
+        resultado = tan(grausParaRadianos(x));
+    }
+    printf("f(x) = %.4f\n", resultado);
+}
+
 int main()
 {
     int opcao;
-    float valor, resultado, a, b, c, x, result_quadratic;
+    float valor, resultado, a, b, c, x, result_quadratic, kConstante, xConstante, k;
     float zeroLinear, bY;
     char concavidade[50];
     char reta[50];
+    char curva[50];
+    char curvaLog[50];
     char linerCruzaY[50];
+    char escolha[10];
     header();
     printf("Menu:\n");
     printf("1. f(x) = k\n");
@@ -72,6 +122,16 @@ int main()
     switch(opcao)
     {
         case 1:
+            printf("Digite o valor de k:\n");
+            scanf("%f", &kConstante);
+            printf("Digite o valor de x:\n");
+            scanf("%f", &xConstante);
+
+            float result = constante(kConstante);
+
+            printf("f(x) = %.4f\n", result);
+
+            break;
 
 
 
@@ -121,6 +181,55 @@ int main()
 
             printf("f(x) = %.4f \n", result_quadratic);
             printf("%s\n", concavidade);
+            break;
+
+        case 4:
+            printf("Digite o valor de x: ");
+            scanf("%f", &x);
+            if (x == 0) {
+                printf("Valor de X invalido");
+            }else {
+                printf("Digite o valor de k: ");
+                scanf("%f", &k);
+
+                if(k > 1){
+                    strcpy(curva, "Curva crescente");
+                }else{
+                    strcpy(curva, "Curva decrescente");
+                }
+                resultado = pow(x, k);
+                printf("f(x) = %.4f\n" ,resultado);
+                printf("%s\n", curva);
+            }
+            break;
+
+        case 5:
+            printf("Digite o valor de k:\n");
+            scanf("%f", &k);
+            printf("Digite o valor de x:\n");
+            scanf("%f", &x);
+
+            if(k > 1){
+                strcpy(curvaLog, "Curva crescente");
+            }else{
+                strcpy(curvaLog, "Curva decrescente");
+            }
+
+            float resultLog = logaritmo(k, x);
+            printf("f(x) = %.4f\n", resultLog);
+            printf("%s\n", curvaLog);
+
+            break;
+
+        case 6:
+            printf("Pressione (G) para entrada em graus ou (R) para entrada em radianos");
+            scanf("%s", &escolha);
+            if(escolha == 'G'){
+                printf("GRAUS PARA RADIANOS\n");
+                printf("Digite o angulo em graus: ");
+                scanf("%f", &valor);
+                resultado = grausParaRadianos(valor);
+            }
 
         case 0:
             if(opcao == 0)
