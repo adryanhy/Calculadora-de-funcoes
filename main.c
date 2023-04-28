@@ -2,9 +2,11 @@
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
+#include <conio.h>
 
 /*--------------Adryan Andre------------------*/
-/*--------------Lais Teixeira------------------*/
+/*--------------Lais de Campos Teixeira-------*/
+/*--------------Lucas Araujo Ferreira---------*/
 
 void header(){
     printf("------------CALCULADORA DE FUNCAO--------------\n");
@@ -105,6 +107,9 @@ int main()
     char curvaLog[50];
     char linerCruzaY[50];
     char escolha[10];
+    char input[100];
+    double res, rad;
+    int sub_escolha =0;
     header();
     printf("Menu:\n");
     printf("1. f(x) = k\n");
@@ -222,14 +227,100 @@ int main()
             break;
 
         case 6:
-            printf("Pressione (G) para entrada em graus ou (R) para entrada em radianos");
-            scanf("%s", &escolha);
-            if(escolha == 'G'){
-                printf("GRAUS PARA RADIANOS\n");
-                printf("Digite o angulo em graus: ");
-                scanf("%f", &valor);
-                resultado = grausParaRadianos(valor);
+            system("cls");
+            while(sub_escolha != 1 && sub_escolha != 2){
+                printf("\n1. Entrada em graus");
+                printf("\n2. Entrada em radianos");
+                printf("\n");
+                scanf("%s", input);
+                sub_escolha = atoi(input);
+                if(sub_escolha < 1 || sub_escolha >2){
+                    printf("\nOpcao invalida. Tente novamente.\n");
+                }
             }
+            if(sub_escolha == 1){
+                printf("Voce escolheu a opcao 1.\n");
+                printf("Digite o valor de x: ");
+                scanf("%f",&x);
+                rad = x * M_PI / 180.0;
+            }else{
+                printf("Voce escolheu a opcao 2.\n");
+                printf("Digite o valor de x: ");
+                scanf("%lf",&x);
+                rad = x;
+            }
+            res = sin(rad);
+            printf("f(x) = %.4lf\n", res);
+            sub_escolha = 0;
+            printf("Pressione qualquer tecla para continuar...\n");
+            getch();
+            system("cls");
+            break;
+
+        case 7:
+            system("cls");
+            while(sub_escolha != 1 && sub_escolha != 2){
+                printf("\n1. Entrada em graus");
+                printf("\n2. Entrada em radianos");
+                printf("\n");
+                scanf("%s",input);
+                sub_escolha = atoi(input);
+                if(sub_escolha < 1 ||sub_escolha > 2){
+                    printf("\nOpcao invalida. Tente novamente.\n");
+                }
+            }
+            if(sub_escolha == 1){
+                printf("Você escolheua opção 1.\n");
+                printf("Digite o valor de x: ");
+                scanf("%lf",&x);
+                rad = x * M_PI / 180.0;
+            }else{
+                printf("Voce escolheu a opcao 2.\n");
+                printf("Digite o valor de x: ");
+                scanf("%lf",&x);
+                rad = x;
+            }
+            res = cos(rad);
+            printf("f(x) = %.4lf\n", res);
+            sub_escolha = 0;
+            printf("\nPressione qualquer tecla para continuar...\n");
+            getch();
+            system("cls");
+            break;
+
+        case 8:
+            system("cls");
+            while(sub_escolha != 1 && sub_escolha != 2){
+                printf("\n1. Entrada em graus");
+                printf("\n2. Entrada em radianos");
+                printf("\n");
+                scanf("%s",input);
+                sub_escolha = atoi(input);
+                if(sub_escolha < 1 ||sub_escolha > 2){
+                    printf("\nOpcao invalida. Tente novamente.\n");
+                }
+            }
+            printf("Digite o valor de x (angulo): ");
+            scanf("%lf", &x);
+            if(sub_escolha == 1){
+                while(fmod(x, 90) == 0){ //não aceita valores múltiplos de 90 graus
+                    printf("\nValor invalido. Tente novamente.\n");
+                    printf("Digite o valor de x: ");
+                    scanf("%lf",&x);
+                }
+                printf("Voce escolheu a opcao 1.\n");
+                rad = x * M_PI / 180.0;
+            }else{
+                printf("Voce escolheu a opcao 2.\n");
+                rad = x;
+            }
+            res = tan(rad);
+            printf("f(x) = %.4lf\n", res);
+            sub_escolha = 0;
+            printf("\nPressione qualquer tecla para continuar...\n");
+            getch();
+            system("cls");
+            break;
 
         case 0:
             if(opcao == 0)
@@ -246,36 +337,4 @@ int main()
             break;
     }
     return 0;
-
-
-
-
-
-
-    /*system("cls");
-           printf("GRAUS PARA RADIANOS\n");
-           printf("Digite o angulo em graus: ");
-           scanf("%f", &valor);
-           resultado = graus_radianos(valor);
-           printf("Resultado da conversao: %.4f", resultado);
-           printf("\n(0). Voltar ao menu\n");
-           scanf("%d", &opcao);
-           if(opcao == 0){
-               system("cls");
-               return main ();
-           }
-           break;*/
-    /*system("cls");
-            printf("RADIANOS PARA GRAUS\n");
-            printf("Digite o angulo em radianos: ");
-            scanf("%f", &valor);
-            resultado = radianos_graus(valor);
-            printf("Resultado da conversao: %.4f", resultado);
-            printf("\n(0). Voltar ao menu\n");
-            scanf("%d", &opcao);
-            if(opcao == 0){
-                system("cls");
-                return main ();
-            }
-            break;*/
 }
